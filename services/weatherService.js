@@ -23,6 +23,11 @@ export async function fetchWeatherData(lat, lng) {
       temp_max: data.main.temp_max,
       feels_like: data.main.feels_like,
       humidity: data.main.humidity,
+      wind: {
+        speed: weatherData.wind.speed || 0,
+        deg: weatherData.wind.deg || 0, 
+        gust: weatherData.wind.gust || 0 
+      },
     };
   } catch (error) {
       console.error('Failed to fetch weather data:', error);

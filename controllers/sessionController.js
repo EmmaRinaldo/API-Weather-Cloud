@@ -37,6 +37,11 @@ export const createSession = async (req, res) => {
         temp_max: weatherData.temp_max,
         feels_like: weatherData.feels_like,
         humidity: weatherData.humidity,
+        wind: {
+            speed: weatherData.wind.speed, 
+            deg: weatherData.wind.deg,     
+            gust: weatherData.wind.gust,
+        },
         });
         await newSession.save();
         res.status(201).json(newSession);
