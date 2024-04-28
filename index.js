@@ -9,7 +9,7 @@ const app = express();
 const port = process.env.PORT || 3000;
 
 app.use(cors({
-    origin: '*' // Spécifiez l'origine de votre application Angular ici, ou utilisez '*' pour accepter toutes les origines
+    origin: '*' // Il faut que je spécifie l'origine de mon app Angular avant de mettre en production
 }));
 app.use(express.json());
 app.use('/api/sessions', sessionRoutes);
