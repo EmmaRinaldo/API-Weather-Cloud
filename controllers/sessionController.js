@@ -16,6 +16,16 @@ export const createSession = async (req, res) => {
     }
 
     try {
+
+        // fetch last session 
+        const tenMinutesAgo = moment().subtract(10, 'minute');
+        const existingSession = await Session.findOne({ email, createdAt: { $gte: tenMinutesAgo } });
+
+        if (existingSession) {
+            // if a recent session exists, return it
+            return res.status(200).json(existingSession);
+        }
+
         // Appel au service météo pour enrichir les données
         const weatherData = await fetchWeatherData(lat, lng);
 
@@ -70,7 +80,7 @@ export const getSessionsByEmail = async (req, res) => {
     }
 
     try {
-        const sessions = await Session.find({ email }).sort({ date: -1, time: -1 });
+        const sessions = await Session.find({ email }).sort({ createdAt: -1 });
         res.json(sessions);
     } catch (error) {
         console.error('Error fetching sessions:', error.stack);
