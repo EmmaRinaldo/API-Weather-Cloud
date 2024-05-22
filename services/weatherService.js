@@ -29,3 +29,7 @@ export async function fetchWeatherData(lat, lng) {
       throw error;  // Rethrow to handle it in the calling function
   }
 }
+
+
+
+
