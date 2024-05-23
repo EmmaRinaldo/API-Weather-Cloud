@@ -18,7 +18,7 @@ export const createSession = async (req, res) => {
     try {
 
         // fetch last session 
-        const tenMinutesAgo = moment().subtract(10, 'minute');
+        const tenMinutesAgo = moment().subtract(5, 'minute');
         const existingSession = await Session.findOne({ email, createdAt: { $gte: tenMinutesAgo } });
 
         if (existingSession) {
