@@ -2,6 +2,8 @@ import express from 'express';
 import cors from 'cors';
 import { connectToDatabase } from './lib/mongodb.js';
 import sessionRoutes from './routes/sessionRoutes.js';
+import authRoutes from './routes/authRoutes.js';
+import { authMiddleware } from './middleware/authMiddleware.js';
 
 
 
@@ -12,7 +14,8 @@ app.use(cors({
     origin: '*' // Il faut que je spécifie l'origine de mon app Angular avant de mettre en production
 }));
 app.use(express.json());
-app.use('/api/sessions', sessionRoutes);
+app.use('/api/auth', authRoutes);
+app.use('/api/sessions', authMiddleware, sessionRoutes);
 
 
 const startServer = async () => {
